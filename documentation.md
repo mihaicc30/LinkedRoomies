@@ -1,7 +1,12 @@
 # Welcome to LinkedRoomies GitHub!
 
 
-# Project Title
+# LinkedRoomies
+
+|    Types of user    | Actions 
+|---------------------|-------------------------------|
+|Student:|10148467       |
+|Live:|[-Link-](https://linkroomie.web.app)|        |
 
 **LinkedRoomies** is a dynamic web application that is built using the latest technologies, including React, Vite, Tailwind CSS, and Firebase. The aim of this project is to provide an efficient and reliable solution for university students who are searching for suitable accommodation and compatible roommates.
 
@@ -16,8 +21,11 @@ Overall, LinkedRoomies provides an all-in-one solution for university students w
 ## Installation
 
 Clone this repository: **git clone https://github.com/mihaicc30/LinkedRoomies.git**
+
 Navigate to the project directory: **cd LinkedRoomies**
+
 Install the necessary dependencies: **npm install**
+
 Start the development server: **npm run dev**
 
 **Note***
