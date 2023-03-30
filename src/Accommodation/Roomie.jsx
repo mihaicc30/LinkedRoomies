@@ -32,6 +32,8 @@ const Roomie = ({i}) => {
         returnStudentPhoto(i)
     }, [i])
 
+    if(!roomiePhoto) return
+
   return (
             <div className="flex flex-col items-center justify-between h-[100%] mt-2 w-[90px]">
                 <img src={roomiePhoto} className="h-[70px] w-[70px] bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.2] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-full" />

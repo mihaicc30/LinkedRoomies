@@ -37,10 +37,8 @@ function App() {
               <Route  path="/profile"         element={<Profile />} />
               <Route  path="*"                element={<Dashboard/>} />
 
-              
               <Route  path="/questionnaire"       element={<Questionnaire />} />
 
-              
               <Route  path="/Admin"       element={<Admin />} />{/*admin panel*/}
 
             </Route>
@@ -48,5 +46,5 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+  }
 export default App;

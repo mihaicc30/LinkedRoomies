@@ -7,10 +7,10 @@ import Modal from '../ModalConfirmation.jsx'
 
 const AdminStudents = () => {
 
-  const [ studs , setStuds] = useState()
+  const [ studs , setStuds] = useState([])
 	const [modalOpen, setModalOpen] = useState(false);
-	const [qID, setQID] = useState();
-	const [modalMessage, setmodalMessage] = useState();
+	const [qID, setQID] = useState([]);
+	const [modalMessage, setmodalMessage] = useState("");
 
  
   const findStudentInWhichRoom = async(stdID) =>{
@@ -42,7 +42,7 @@ const AdminStudents = () => {
     getStudents();
   }, []);
 
-  // const rID = e.target.getAttribute('data-rID')
+  // const rID = e.target.getAttribute('data-rid')
 
   const handleDelete = async (e) => {
     const rID = e
@@ -81,7 +81,7 @@ const AdminStudents = () => {
   }
   
   const modalInit = (e) =>{
-    setQID(e.target.getAttribute('data-rID'));
+    setQID(e.target.getAttribute('data-rid'));
     setmodalMessage(e.target.innerText);
     setModalOpen(true)
   }
@@ -90,9 +90,7 @@ const AdminStudents = () => {
     <>
     <div className="studsGrid flex flex-wrap justify-center">
       {studs && studs.map((std,i)=>(
-        <>
-        {/* max-[671px]:text-sm max-[420px]:basis-[80%] max-[671px]:basis-[43%] max-[671px]:max-w-[unset] */}
-        <div className="bg-gradient-to-r from-[#bfbfbf40] to-[#ffffff] flex flex-col basis-[80%]  m-1 rounded-xl text-[#212e72] text-center max-w-[210px] shadow-md shadow-gray-600">
+        <div key={i} className="bg-gradient-to-r from-[#bfbfbf40] to-[#ffffff] flex flex-col basis-[80%]  m-1 rounded-xl text-[#212e72] text-center max-w-[210px] shadow-md shadow-gray-600">
 
           <div className={`relative flex justify-center overflow-hidden h-[140px] `} >
             <img src={std.photo} className="absolute inset-0 z-[10] brightness-[.3] opacity-[.3] rounded-tl-xl" alt={std.name + " avatar"}/>
@@ -107,17 +105,15 @@ const AdminStudents = () => {
           </div>
             <div className="relative text-gray-700 font-bold flex p-1 pt-[16px]  flex-wrap gap-[4px] justify-center rounded-b-lg mt-4 text-xs max-[671px]:text-[10px]">
               <span className="absolute cursor-default top-0 font-bold text-xs contrast-50 leading-5">Actions</span>
-              <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" data-rID={std.uid} onClick={modalInit}>Kick Out</button>
+              <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" disabled={!std.location} data-rid={std.uid} onClick={modalInit}>Kick Out</button>
               
-              <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" data-rID={std.uid} onClick={modalInit}>Delete Account</button>
+              <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" data-rid={std.uid} onClick={modalInit}>Delete Account</button>
             </div>
 
         </div>
-      
-        </>
         ))
       }
-      {modalOpen && <Modal setOpenModal={setModalOpen} handleDelete={handleDelete} message={modalMessage} handleKick={handleKick} qID={qID} type={"confirmation"}/>}
+      {modalOpen && <Modal setOpenModal={setModalOpen} handleDelete={handleDelete} message={modalMessage} handleKick={handleKick} qID={qID} type={"confirmation"} key={crypto.randomUUID()}/>}
     </div>
     </>
   )

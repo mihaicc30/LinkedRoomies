@@ -5,8 +5,8 @@ import RoomModal from '../RoomModal.jsx'
 
 const AdminRooms = () => {
   
-  const [ roomz , setRoomz] = useState()
-  const [ roomID , setRoomID] = useState()
+  const [ roomz , setRoomz] = useState([])
+  const [ roomID , setRoomID] = useState([])
 	const [modalOpen, setModalOpen] = useState(false);
 	const [modalOpen2, setModalOpen2] = useState(false);
 
@@ -62,13 +62,13 @@ const AdminRooms = () => {
     }
   }
   
- 
+  if(!roomz) return
+  if(roomz.length < 1) return
   return (
     <>
     <div className="flex flex-wrap justify-center ">
       {roomz && roomz.map((room,i)=>(
-        <>
-        <div className="bg-gradient-to-r from-[#bfbfbf40] to-[#ffffff] flex flex-col max-[671px]:text-sm 
+        <div key={room.location} className="bg-gradient-to-r from-[#bfbfbf40] to-[#ffffff] flex flex-col max-[671px]:text-sm 
         max-[420px]:basis-[80%] 
         max-[671px]:basis-[43%] 
         basis-[30%] 
@@ -83,10 +83,14 @@ const AdminRooms = () => {
           <div className="grow cursor-default">
             <p className="font-bold">{room.location}</p>
             <p>{room.students.length}/{room.pax}</p>
-            <p className="text-start">{room.students.length > 0 && room.students.map((s,i)=> 
-                <p className=" eli2 h-[20px!important]" key={i}>{s}</p> )}
-            </p>
-            <p>{room.students.length < 1 && <p className="truncate text-red-400">Vacant</p> }</p>
+
+            {room.students.length < 1 
+            ? <p className="truncate text-red-400">Vacant</p> 
+            : room.students.map((s,i)=> 
+              <li className="eli2 h-[20px!important]" key={i}>{s}</li> 
+              )
+            }
+
           </div>
           
           <div className="flex flex-nowrap justify-evenly pt-[16px] my-4 text-gray-700 font-bold rounded-b-lg relative text-xs max-[671px]:text-[10px]">
@@ -96,11 +100,10 @@ const AdminRooms = () => {
           </div>
 
         </div>
-        </>
         ))
       }
-      {modalOpen && <RoomModal setOpenModal={setModalOpen} message={""} type={"loading"}/>}
-      {modalOpen2 && <RoomModal setOpenModal={setModalOpen2} message={""} room={roomID} handlegetRooms={getRooms} type={"processing"}/>}
+      {modalOpen && <RoomModal setOpenModal={setModalOpen} message={""} type={"loading"} key={crypto.randomUUID()}/>}
+      {modalOpen2 && <RoomModal setOpenModal={setModalOpen2} message={""} room={roomID} handlegetRooms={getRooms} type={"processing"} key={crypto.randomUUID()}/>}
     </div>
     </>
   )

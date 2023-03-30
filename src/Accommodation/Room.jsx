@@ -4,12 +4,20 @@ import StudentCard from './StudentCard.jsx'
 import Modal from '../Modal.jsx'
 import { auth, db, logout } from "../Config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { matchUsers, overallMatch } from "../Config/MatchFunction";
 
 const Room = (props) => {
 
 
     const [user, loading, error] = useAuthState(auth);
-    const[modalRoomID, setModalRoomID] = useState("")
+    const {data, me, aniDelay, filters, userIsInRoom} = props
+    const [modalRoomID, setModalRoomID] = useState("")
+	const [modalOpen, setModalOpen] = useState(false);
+	const [modalOpen2, setModalOpen2] = useState(false);
+    const [roomPC, setRoomPC] = useState(0)
+
+    const [showFilteredComponent, setShowFilteredComponent] = useState(false);
+    const [showComponent, setShowComponent] = useState(false);
     
     const handleJoin = async(roomID) =>{
         // console.log(roomID);
@@ -63,20 +71,10 @@ const Room = (props) => {
         }, 300);  
     }
 
-
-    const {data, me, aniDelay, filters, userIsInRoom} = props
-	const [modalOpen, setModalOpen] = useState(false);
-	const [modalOpen2, setModalOpen2] = useState(false);
-	const [studentData, setStudentData] = useState([]);
-    const [roomPC, setRoomPC] = useState(0)
-
-    const [showFilteredComponent, setShowFilteredComponent] = useState(false);
-
     useEffect(()=>{
         if(data.students.length > 0) {
             
             const updatedStudents = data.students.filter(id => id !== user.uid);
-            setStudentData(updatedStudents)
             async function calculateMatch() {
                 setRoomPC(await overallMatch(props.me, updatedStudents))
             }
@@ -93,10 +91,6 @@ const Room = (props) => {
 
     },[me, data, roomPC, filters, userIsInRoom])
 
-
-    
-    const [showComponent, setShowComponent] = useState(false);
-
     useEffect(() => {
         const timer = setTimeout(() => {
             if(showFilteredComponent) setShowComponent(true);
@@ -108,23 +102,15 @@ const Room = (props) => {
     if (showComponent && showFilteredComponent)
         return (
             <>
-                <div
-                    className="flex flex-col basis-1/4 justify-evenly border-2 p-4 animate-fadeUP1 min-w-[260px] min-h-[260px]"
-                >
-                    {/* below to insert a slideshow of pics */}
-                    <>
-                        <img
-                            src={data.imgs[0]}
-                            alt="avatar"
-                            className="my-4 w-[100%] rounded shadow-lg shadow-[#000] p-[2px] animate-fadeUP1"
-                        />
-                        <div className="text-[2rem] whitespace-nowrap animate-fadeUP1">
-                            {data.location}
-                        </div>
-                        <div className="whitespace-nowrap animate-fadeUP1">
-                            Pax: {data.students.length}/{data.pax}
-                        </div>
-                    </>
+                <div key={crypto.randomUUID()} className="flex flex-col basis-1/4 justify-evenly border-2 p-4 animate-fadeUP1 min-w-[260px] min-h-[260px]" >
+                    {/* future idea : below to insert a slideshow of pics */}
+                    <img src={data.imgs[0]} alt="avatar" className="my-4 w-[100%] rounded shadow-lg shadow-[#000] p-[2px] animate-fadeUP1" />
+
+                    <div className="text-[2rem] whitespace-nowrap animate-fadeUP1">{data.location}</div>
+                    <div className="whitespace-nowrap animate-fadeUP1">
+                        Pax: {data.students.length}/{data.pax}
+                    </div>
+
                     <div className="animate-fadeUP1">
                         {/* if there are people in the flat */}
                         {/* display here and the % match with user profile */}
@@ -188,51 +174,26 @@ const Room = (props) => {
                                     </button>
                                     }
                             
-        {/* userIsInRoom == data.uid */}
+                            {/* userIsInRoom == data.uid */}
                             {roomPC && data.students.length - data.pax != 0 &&
-                                <>
-                                <button
-                                    key={crypto.randomUUID()}
-                                    type="button"
-                                    onClick={() =>
-                                        document
-                                            .getElementById(data.uid)
-                                            .classList.remove("hidden")
-                                    }
-                                    className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-2 px-4"
-                                >
-                                    
+                                <button key={crypto.randomUUID()} type="button" onClick={() => document.getElementById(data.uid).classList.remove("hidden")} className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-2 px-4" >
                                     <p>Match</p>
                                     <p>Details</p>
                                 </button>
-                                
-                                </>
                                 }
 
                                 {roomPC && data.students.length - data.pax == 0 && userIsInRoom == data.uid &&
-                                <>
-                                <button
-                                    key={crypto.randomUUID()}
-                                    type="button"
-                                    onClick={() =>
-                                        document
-                                            .getElementById(data.uid)
-                                            .classList.remove("hidden")
-                                    }
-                                    className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-2 px-4"
-                                >
+                                <button key={crypto.randomUUID()} type="button" onClick={() => document.getElementById(data.uid).classList.remove("hidden")} className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-2 px-4" >
                                     <p>Match</p>
                                     <p>Details</p>
                                 </button>
-                                
-                                </>
                                 }
 
                                 <div className="fixed inset-0 z-[50] hidden items-center justify-center bg-[#000000e6] gap-[2rem] text-sm" id={data.uid} >
                                     <div className="fixed top-[150px] bottom-[5vw] right-[5vw] left-[5vw]  flex flex-col flex-nowrap justify-center gap-[1rem] align-center items-center bg-[#f1f1f1] animate-fadeIN max-w-[900px] overflow-auto max-[780px]:flex-col rounded-lg">
                                         
                                         <div className="flex flex-col h-[100%] items-center p-6">
-                                            <StudentCard data={props.me} myself={"x"} />
+                                            <StudentCard data={props.me} myself={"x"} key={props.me.uid}/>
 
                                             <div className="overallMatchInfo">
                                                 <p className="textShadow">Match:</p>
@@ -243,11 +204,8 @@ const Room = (props) => {
                                             <div className="flex flex-wrap w-[100%] justify-center">
                                                 {data.students.map((stud,index) => {
                                                     if(stud.uid == me.uid ) return
-                                                    return (
-                                                        <>
-                                                            <StudentCard key={index} data={stud} myself={props.me} />
-                                                        </>
-                                                    );
+                                                    return <StudentCard key={stud.uid} data={stud} myself={props.me} />
+                                                    
                                                 })}
                                             </div>
                                         </div>
@@ -270,65 +228,3 @@ const Room = (props) => {
 
 export default Room
  
-
-//  ** if got time, will make the room fit 3 or more students and match those **  **note to self**
-// hehe sorted, leaving this here as a little secret cookie :D
-
-async function overallMatch(targetUser, otherUsers) {
-    if(!otherUsers || otherUsers.length < 1) return console.log("no other users present");
-    let weights = {Clean: 1, Drinking: 1, Friendly: 1, Responsible: 1, Smoking: 1};
-    let diffSum = 0;
-    let maxDiffSum = 0;
-    let c = []
-    await otherUsers.forEach(async(user) => {
-        if(user.uid == targetUser.uid) return
-        let r = await matchUsers(targetUser.attr,user.attr)
-        c.push(r)
-
-        let userDiffSum = 0;
-        let userMaxDiffSum = 0;
-        Object.keys(targetUser.attr).forEach((quality) => {
-                    let diff = Math.abs(targetUser.attr[quality] - user.attr[quality]);
-                  
-                    if(weights[quality] == undefined) return
-                    userDiffSum += diff * weights[quality];
-                    userMaxDiffSum += 5 * weights[quality]; // assuming qualities range from 0 to 5
-                });
-                
-        // Add the current user's weighted difference sum to the overall sum
-        diffSum += userDiffSum;
-        maxDiffSum += userMaxDiffSum;
-    });
-    if(c.length < 1) return
-    const total = c
-        .map(percent => parseFloat(percent))
-        .reduce((sum, value) => sum + value);
-    const average = (total / c.length).toFixed(2);
-    // console.log("rezult>",maxDiffSum,diffSum,maxDiffSum);
-    // Calculate the overall match percentage by dividing the weighted difference
-    // sum by the maximum possible weighted difference sum for all users
-    return average + '%';
-}
-
-
-
-async function matchUsers(user1, user2) {
-    if(user1 == "x") return
-    if(user2 == "x" || user2 == undefined || user2 == "undefined") return
-    let weights = {Clean: 1, Drinking: 1, Friendly: 1, Responsable: 1, Smoking: 1}
-    let diffSum = 0;
-    let maxDiffSum = 0;
-    
-    // Loop through each quality and calculate the absolute difference
-    // multiplied by the corresponding weight
-    Object.keys(user1).forEach((quality) => {
-        let diff = Math.abs(user1[quality] - user2[quality]);
-        diffSum += diff * weights[quality];
-        maxDiffSum += 5 * weights[quality]; // assuming qualities range from 0 to 5
-    });
-    // console.log(maxDiffSum, maxDiffSum);
-    // Calculate the match percentage by dividing the weighted difference
-    // sum by the maximum possible weighted difference sum
-    let matchPct = (maxDiffSum - diffSum) / maxDiffSum * 100;
-    return matchPct.toFixed(2) + '%';
-}

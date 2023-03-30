@@ -57,7 +57,7 @@ You need to start the development server using Vite's start command as shown
 
 ```mermaid
 graph TD
-A[Login Submit]  --> B(Get User Type)
+A(Login Submit)  --> B(Get User Type)
 
 B --> C(Grab Navigation bar for type of user)
 

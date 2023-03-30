@@ -12,6 +12,8 @@ import {Logo} from '../assets/logo.jsx';
 import ScrollToTopButton from '../ScrollToTopButton.jsx'
 import Nav from '../Navigation/Nav'
 
+import { matchUsers, overallMatch } from "../Config/MatchFunction";
+
 function Accommodation() {
   const navigate = useNavigate();
 
@@ -24,6 +26,18 @@ function Accommodation() {
   const [sortingOrder, setSortingOrder] = useState("asc")
 
   const [userRoom, setUserRoom] = useState(false)
+  const [userData, setUserData] = useState()
+  const [questionnaire, setQuestionnaire] = useState(true)
+
+  
+  const [filter, setfilter] = useState({
+    "maxppl": "All",
+    "ensuite": "All",
+    "match": 0,
+    "full": false
+  });
+
+  const [trig, setTrig] = useState(false)
 
 
   const roomsRef = useRef()
@@ -58,16 +72,6 @@ function Accommodation() {
     setRooms(successfulResults);
   }
   
-  const [userData, setUserData] = useState()
-  const [questionnaire, setQuestionnaire] = useState(true)
-
-  
-  const [filter, setfilter] = useState({
-    "maxppl": "All",
-    "ensuite": "All",
-    "match": 0,
-    "full": false
-});
 
   const fetchUserName = async () => {
     if (!user) return
@@ -87,7 +91,6 @@ function Accommodation() {
     }
   };
 
-  const [trig, setTrig] = useState(false)
   useEffect(() => {
     if (loading) {
       return 
@@ -160,23 +163,23 @@ function Accommodation() {
       <p className="mt-2 pb-5"><NavLink to="/questionnaire" activeclassname={"active"}><span className=" bg-red-400 font-bold text-[white] rounded-2xl shadow-3xl p-3  cursor-pointer whitespace-nowrap">&#62;&#62; the questionnaire &#60;&#60;</span></NavLink></p>
     </main>
     }
-  {questionnaire && 
+    {questionnaire && 
     <main className="w-[100%] flex flex-col items-center " >
           
-        <p className="font-bold border-b-2 border-b-red-400 text-center mx-auto">-Current Accommodation-</p>
+      <p className="font-bold border-b-2 border-b-red-400 text-center mx-auto">-Current Accommodation-</p>
      
-       {/* Current Accommodation */}
-       {!userRoom && 
-       <p className="my-4">No room selected!</p>
-       }
-       {userRoom && 
-       <div className="flex flex-row my-4 p-4 border-2 justify-center w-[98%] flex-wrap">
+      {/* Current Accommodation */}
+      {!userRoom && 
+      <p className="my-4">No room selected!</p>
+      }
+      {userRoom && 
+      <div className="flex flex-row my-4 p-4 border-2 justify-center w-[98%] flex-wrap">
         
         <div className="flex flex-col justify-evenly items-center relative">
           <img className="ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl m-2 w-[auto] h-[150px] scale-[1] mx-5" src={userRoom.imgs[0]}/>
           <p className="absolute top-[18%] left-[50%] py-1 px-4 translate-x-[-50%] translate-y-[-50%] rounded-lg font-bold bg-gradient-to-r from-gray-300 to-white ">{userRoom.location}</p>
-        </div>
-        <div className="flex flex-row justify-evenly items-center">
+      </div>
+      <div className="flex flex-row justify-evenly items-center">
 
           <div className="flex flex-col justify-between items-center h-[100%] mt-2 w-[90px]">
             <img src={namePhoto} className="h-[70px] w-[70px] bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.2] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-full"/>
@@ -186,11 +189,8 @@ function Accommodation() {
         <>
           {userRoom.students.map((student, index)=>{
             if(user.uid == student) return
-            return(
-              <>
-                <Roomie key={index} i={student}/>
-              </>
-            )}
+            return <Roomie key={crypto.randomUUID()} i={student}/>
+            }
             )}
         </>
         }
@@ -262,18 +262,20 @@ function Accommodation() {
       </div>
 
       {/* Rooms */}
-        <div ref={roomsRef} className="listedRooms flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative ">
+      <div ref={roomsRef} className="listedRooms flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative ">
 
           <p className="absolute top-[0%] border-b-2 border-[red] font-bold whitespace-nowrap">-Rooms-</p>
           {/*start of post of room*/}  
           <div className="flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative" id="roomsLength">
-            { rooms.map((room,i)=> <Room key={i} triggerRefresh={setTrig} me={userData} data={room} aniDelay={i} filters={filter} userIsInRoom={userRoom.uid}/> )}
+            { rooms.map((room,i)=> 
+            <Room key={room.uid} triggerRefresh={setTrig} me={userData} data={room} aniDelay={i} filters={filter} userIsInRoom={userRoom.uid}/> 
+            )}
           </div>
           
       </div>
 
 
-			<ScrollToTopButton/>
+			<ScrollToTopButton key={crypto.randomUUID()}/>
     </main>
   }
     

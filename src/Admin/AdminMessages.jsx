@@ -3,16 +3,8 @@ import { auth, db, logout } from "../Config/firebase";
 import { query, collection, getDocs, where, setDoc, doc, updateDoc, orderBy, deleteDoc  } from "firebase/firestore";
 
 const AdminMessages = () => {
-  const [ messages , setMessages] = useState()
-  const [ currentMessage , setCurrentMessage] = useState()
-
-  // const findWhichRoomHasStudent = async (studentUID) => {
-  //   const q = await query(collection(db, "users"), where("uid", "==", studentUID));
-  //   const docz = await getDocs(q);
-  //   if (docz.docs[0]?.data()) {
-  //     return docz.docs[0]?.data().name;
-  //   }
-  // };
+  const [ messages , setMessages] = useState(false)
+  const [ currentMessage , setCurrentMessage] = useState(false)
   
   const handleMarking = async (id, sts) => {
     try {
@@ -59,7 +51,6 @@ const AdminMessages = () => {
   }
 
   useEffect(() => {
-   
     getMessages();
   }, [currentMessage]);
   
@@ -87,6 +78,8 @@ const AdminMessages = () => {
       }
     }, 111);
   }
+
+  if(!messages) return
  
   return (
     <>
@@ -97,17 +90,15 @@ const AdminMessages = () => {
       
       <p className="font-bold text-xl">-Current Messages-</p>
       {messages && messages.map((mess,i)=>(
-        <>
-        <div className={`flex flex-row justify-between divide-y-2 py-2 bg-gradient-to-t from-gray-200 to-transparent scale-[.95] hover:scale-[.97] ease-in duration-300 shadow-md shadow-gray-900/30 ${mess.status == "unread" ? 'font-bold' : ''} max-[671px]:flex-col`} key={i} onClick={()=>setCurrentMessage(mess)}>
+        <div key={crypto.randomUUID()} className={`flex flex-row justify-between divide-y-2 py-2 bg-gradient-to-t from-gray-200 to-transparent scale-[.95] hover:scale-[.97] ease-in duration-300 shadow-md shadow-gray-900/30 ${mess.status == "unread" ? 'font-bold' : ''} max-[671px]:flex-col`} onClick={()=>setCurrentMessage(mess)}>
             <p className="text-start basis-[20%] flex flex-col ">
-              <span key={i} className="text-sm  eli1">{mess.name}</span>
-              <span key={i} className="text-sm  eli1">{mess.email}</span>
-              <span key={i} className="text-xs">{new Date(mess.date.seconds * 1000).toLocaleString()}</span>
+              <span className="text-sm  eli1">{mess.name}</span>
+              <span className="text-sm  eli1">{mess.email}</span>
+              <span className="text-xs">{new Date(mess?.date.seconds * 1000).toLocaleString()}</span>
             </p>
-            <p key={i} className=" basis-[40%] eli23 grow">{mess.message}</p>
-            <p key={i} className="capitalize basis-[20%] text-center max-[671px]:text-start">{mess.status}</p>
+            <p className=" basis-[40%] eli23 grow">{mess.message}</p>
+            <p className="capitalize basis-[20%] text-center max-[671px]:text-start">{mess.status}</p>
         </div>
-        </>
         ))
       }
       </div>
@@ -116,11 +107,9 @@ const AdminMessages = () => {
       <>
       {/* detailed messages */}
       <div className="animate-fadeIN overflow-y-scroll border-2 p-1 max-[672px]:w-[86vw] bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 basis-[60%]">
-      {currentMessage && 
-      <>
         <div className="flex justify-between items-center ">
           <p className="font-bold text-xl p-1 ">-Detailed Messages-</p>
-          <svg onClick={()=>setCurrentMessage()} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[20px] h-[20px] m-2 stroke-[6px] ">
+          <svg onClick={()=>setCurrentMessage(false)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-[20px] h-[20px] m-2 stroke-[6px] ">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
@@ -129,7 +118,7 @@ const AdminMessages = () => {
 
           <div className="max-w-[80%]  grow max-[671px]:max-w-[99%]">
             <div className="flex flex-col gap-[1px] whitespace-nowrap border-2 p-1 w-[100%] justify-evenly bg-[#f9f5f5]">
-              <span className="flex justify-between" title={new Date(currentMessage.date.seconds * 1000).toLocaleString()} >{new Date(currentMessage.date.seconds * 1000).toLocaleString()} <span title={currentMessage.status} className="font-bold capitalize">{currentMessage.status}</span></span>
+              <span className="flex justify-between" title={new Date(currentMessage?.date?.seconds * 1000).toLocaleString()} >{new Date(currentMessage?.date?.seconds * 1000).toLocaleString()} <span title={currentMessage.status} className="font-bold capitalize">{currentMessage.status}</span></span>
               <span title={currentMessage.name} className="capitalize eli3">{currentMessage.name} </span>
               <span title={currentMessage.email} className="capitalize eli3">{currentMessage.email}</span>
               
@@ -156,8 +145,7 @@ const AdminMessages = () => {
 
             
           </div>
-          </>
-        }
+    
       </div>
 
       </>

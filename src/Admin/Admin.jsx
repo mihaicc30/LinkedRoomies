@@ -37,15 +37,15 @@ const Admin = () => {
       <div className="flex flex-nowrap  overflow-hidden">
 
         <div className={`flex flex-col items-inline w-[200px] max-[671px]:w-[36px] min-[671px]:w-[200px] text-[#162050] font-bold `}>
-          <AdminNav navi={setNavState}/>
+          <AdminNav  key={crypto.randomUUID()} navi={setNavState}/>
         </div>
 
         <div className="flex-1 left-[20%] h-[100%]  overflow-y-auto pb-5 text-[#162050]">
-			    {navState == "Dash" && <AdminDash/>}
-			    {navState == "Students" && <AdminStudents/>}
-			    {navState == "Rooms" && <AdminRooms/>}
-			    {navState == "Messages" && <AdminMessages/>}
-			    {navState == "Profile" && <AdminProfile/>}
+			    {navState == "Dash" && <AdminDash  key={crypto.randomUUID()}/>}
+			    {navState == "Students" && <AdminStudents  key={crypto.randomUUID()}/>}
+			    {navState == "Rooms" && <AdminRooms  key={crypto.randomUUID()}/>}
+			    {navState == "Messages" && <AdminMessages  key={crypto.randomUUID()}/>}
+			    {navState == "Profile" && <AdminProfile  key={crypto.randomUUID()}/>}
         </div>
 
       </div>
