@@ -24,16 +24,16 @@ const Questionnaire = () => {
         {"How organized do you keep your personal belongings?":["Rarely","Occasionally","Often"]},
         //Friendly
         {"How often do you initiate conversations with others?":["Rarely","Occasionally","Often"]},
-        {"How often do you actively listen to others during conversations":["Rarely","Occasionally","Often"]},
+        {"How often do you actively listen to others?":["Rarely","Occasionally","Often"]},
         //Drinking
         {"How often do you consume alcoholic beverages?":["Rarely","Occasionally","Often"]},
-        {"How often do you consume alcohol to the point of getting drunk?":["Rarely","Occasionally","Often"]},
+        {"How often do you get drunk?":["Rarely","Occasionally","Often"]},
         //Responsable
         {"How often do you follow through on your commitments?":["Rarely","Occasionally","Often"]},
         {"How often do you take ownership of your mistakes and seek to correct them?":["Rarely","Occasionally","Often"]},
         //Smoking
         {"How often do you smoke cigarettes or other tobacco products?":["Rarely","Occasionally","Often"]},
-        {"How willing are you to quit smoking and seek help if necessary? ":["Rarely","Occasionally","Often"]},
+        {"How often you smoke indoors?":["Rarely","Occasionally","Often"]},
     ]
     
     const [userTraitsCalculated, setUserTraitsCalculated] = useState({
@@ -46,12 +46,12 @@ const Questionnaire = () => {
 
     const calculateTraits = () =>{
 
-        //clean
         let Clean = userTraits[1] == 0 ? userTraits[0] - 1 : userTraits[1] == 2 ? userTraits[0] : userTraits[0] + 1
         let Drinking = userTraits[3] == 0 ? userTraits[2] - 1 : userTraits[3] == 2 ? userTraits[2] : userTraits[2] + 1
         let Friendly = userTraits[5] == 0 ? userTraits[4] - 1 : userTraits[5] == 2 ? userTraits[4] : userTraits[4] + 1
         let Responsable = userTraits[7] == 0 ? userTraits[6] - 1 : userTraits[7] == 2 ? userTraits[6] : userTraits[0] + 1
         let Smoking = userTraits[9] == 0 ? userTraits[8] - 1 : userTraits[9] == 2 ? userTraits[8] : userTraits[8] + 1
+
         Clean = Clean < 0 ? Clean = 0 : Clean > 5 ? Clean = 5 : Clean
         Drinking = Drinking < 0 ? Drinking = 0 : Drinking > 5 ? Drinking = 5 : Drinking
         Friendly = Friendly < 0 ? Friendly = 0 : Friendly > 5 ? Friendly = 5 : Friendly
@@ -132,19 +132,6 @@ const Questionnaire = () => {
                 attr:userTraitsCalculated,
                 questionnaire:true,
             })
-
-            // const userRef = collection(db, "users");
-            // await setDoc(doc(userRef, data.uid), {
-            //     email: data.email,
-            //     name: data.name,
-            //     photo: data.photo,
-            //     uid: user.uid,
-            //     attr: userTraitsCalculated,
-            //     questionnaire:true,
-            //     date: data.date ? data.date : new Date(),
-            //     lastUpdated: new Date(),
-            // })
-            
 		    setModalOpen(true)
         } catch (error) {
             console.log(error);
