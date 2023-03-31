@@ -60,14 +60,12 @@ function Register() {
 			errors.push("Password too short.")
 		}
 		
-		console.log(errors);
 		if(errors.length > 0) {
 			errors.map((err,i)=>  setErrors(prevErrors => [...prevErrors, err]))
 			
 		} else {
 			console.log("Registering user");
 			const regMe = await registerWithEmailAndPassword(values.name, values.email, values.password);
-			console.log(regMe);
 			if (regMe != "Success") setErrors(regMe);
 		}
 
@@ -115,7 +113,6 @@ function Register() {
 						Register
 					</button>
 					<div className="flex flex-col">
-						{console.log(errors)}
 					{errors && errors.map((err,i) => (
 						<p key={i} className="text-red-400">🔻{err}</p>
 					))}

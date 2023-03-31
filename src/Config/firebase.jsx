@@ -67,13 +67,13 @@ const signInWithFacebook = async() => {
         questionnaire: false,
         date: new Date()
       });
-      console.log("New user added with ID: ", newUserRef.id);
+      console.log("User does not exists in Firestore. New user added with ID: ", newUserRef.id);
     } else {
       const docRef = await doc(db, 'users', q.docs[0].id)
       await updateDoc(docRef, {
         photo: URL.createObjectURL(blob),
       })
-      console.log("User already exists in Firestore");
+      console.log("User already exists in Firestore. No updates needed.");
     }
 
   } catch (error) {
@@ -101,23 +101,18 @@ const signInWithGoogle = async () => {
         questionnaire: false,
         date: new Date()
       });
-      console.log("New user added with ID: ", newUserRef.id);
+      console.log("User does not exists in Firestore. New user added with ID: ", newUserRef.id);
     } else {
-      console.log("User already exists in Firestore");
+      console.log("User already exists in Firestore. No updates needed.");
     }
+    console.log("Popup is successfull. Proceeding...");
   } catch (error) {
-    console.error(error);
-    console.log(error.message);
+    if(error == "FirebaseError: Firebase: Error (auth/popup-closed-by-user).") console.log("User closed login popup.")
   }
 };
 
 const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
+  await signInWithEmailAndPassword(auth, email, password)
 };
 
 const registerWithEmailAndPassword = async (name, email, password) => {

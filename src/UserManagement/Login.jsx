@@ -12,6 +12,7 @@ import {Google} from '../assets/Google.jsx';
 import {Facebook} from '../assets/Facebook.jsx';
 
 function Login() {
+	const [err, setErrors] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -23,7 +24,62 @@ function Login() {
     if (loading) return
 
     if (user) navigate("/dashboard");
-  }, [user, loading]);
+  }, [user, loading, err]);
+
+
+  const handleLogin = async(method) => {
+    switch (method) {
+      case "logInWithEmailAndPassword":
+        try {
+          await logInWithEmailAndPassword(email, password)
+          setErrors("")
+        } catch (error) {
+          switch (error.message) {
+            case "Firebase: Error (auth/user-not-found).":
+              setErrors("User is not found."); 
+              break;
+          
+            case "Firebase: Error (auth/wrong-password).":
+              setErrors("Password is incorrect."); 
+              break;
+
+            case "Firebase: Error (auth/internal-error).":
+              setErrors("Login fields are not valid."); 
+              break;
+
+            case "Firebase: Error (auth/invalid-email).":
+              setErrors("Login fields are not valid."); 
+              break;
+    
+            default:
+              break;
+          }
+        }
+        break;
+    
+      case "signInWithGoogle":
+        console.log("Opening google login popup.");
+        try {
+          setErrors("")
+          await signInWithGoogle()
+        } catch (error) {
+          console.log("checking for errors google 2");
+          switch (error.message) {
+            case "Error (auth/popup-closed-by-user).":
+              setErrors("User closed popup."); 
+              break;
+          
+            default:
+              break;
+          }
+      }
+      break;
+      default:
+        break;
+    }
+   
+  };
+
 
   return (
     <>
@@ -46,13 +102,16 @@ function Login() {
         />
         <button
           className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2"
-          onClick={() => logInWithEmailAndPassword(email, password)}>
+          onClick={() => handleLogin("logInWithEmailAndPassword")}>
           Login
         </button>
+
+        {err &&  <p key={i} className="text-red-400">🔻{err}</p> }
+
         <p className="my-5">- or -</p>
 
         <div className="flex flex-row w-[fit-content] mx-auto gap-[10px]">
-          <button className="text-center m-auto bg-gradient-to-r from-transparent" onClick={signInWithGoogle}>
+          <button className="text-center m-auto bg-gradient-to-r from-transparent" onClick={() => handleLogin("signInWithGoogle")}>
             <Google/>
           </button>
 
