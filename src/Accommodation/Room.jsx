@@ -62,9 +62,9 @@ const Room = (props) => {
         roomDATA.students.push(user.uid)
 
         const docRef2 = await doc(db, 'rooms', docRoomID)
-		      await updateDoc(docRef2, {
+        await updateDoc(docRef2, {
           	students : roomDATA.students
-          })
+        })
 
         setTimeout(() => {
             props.triggerRefresh(true)

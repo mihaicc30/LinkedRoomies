@@ -4,6 +4,7 @@ import { auth, db, logout } from "../Config/firebase";
 import { query, collection, getDocs, where, setDoc, doc, updateDoc, deleteDoc  } from "firebase/firestore";
 import { getAuth, updateProfile } from "firebase/auth";
 import Modal from '../ModalConfirmation.jsx'
+import UserRating from '../Accommodation/UserRating'
 
 const AdminStudents = () => {
 
@@ -77,7 +78,6 @@ const AdminStudents = () => {
     } else {
       console.log("user not found");
     }
-
   }
   
   const modalInit = (e) =>{
@@ -93,6 +93,9 @@ const AdminStudents = () => {
         <div key={i} className="bg-gradient-to-r from-[#bfbfbf40] to-[#ffffff] flex flex-col basis-[80%]  m-1 rounded-xl text-[#212e72] text-center max-w-[210px] shadow-md shadow-gray-600">
 
           <div className={`relative flex justify-center overflow-hidden h-[140px] `} >
+            <div className="absolute left-0">
+              <UserRating key={crypto.randomUUID()} data={std.rating} currUser={std.uid} roomieUser={std.uid} tr={false} infoOnly={true}/>
+            </div>
             <img src={std.photo} className="absolute inset-0 z-[10] brightness-[.3] opacity-[.3] rounded-tl-xl" alt={std.name + " avatar"}/>
             <img style={{ position:"inherit"}} className="divide-y inherit divide-dashed z-[20] w-[120px] h-[120px] rounded-full my-5 border-4 border-white hover:scale-[1.2] ease duration-300" src={std.photo} alt={std.name + " avatar"} />
           </div>
@@ -105,7 +108,7 @@ const AdminStudents = () => {
           </div>
             <div className="relative text-gray-700 font-bold flex p-1 pt-[16px]  flex-wrap gap-[4px] justify-center rounded-b-lg mt-4 text-xs max-[671px]:text-[10px]">
               <span className="absolute cursor-default top-0 font-bold text-xs contrast-50 leading-5">Actions</span>
-              <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" disabled={!std.location} data-rid={std.uid} onClick={modalInit}>Kick Out</button>
+              <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" disabled={!std.location} data-rid={std.uid} onClick={modalInit}>Send Eviction</button>
               
               <button className="max-[671px]:w-[100%!important] w-[60px] rounded-lg m-1 p-1 bg-gradient-to-t from-gray-200 to-transparent hover:contrast-[2] hover:scale-[1.05] hover:brightness-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30" data-rid={std.uid} onClick={modalInit}>Delete Account</button>
             </div>

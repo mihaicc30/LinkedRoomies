@@ -63,6 +63,7 @@ const signInWithFacebook = async() => {
         name: user.displayName,
         email: user.email,
         photo: user.photoURL,
+        rating: [],
         questionnaire: false,
         date: new Date()
       });
@@ -96,6 +97,7 @@ const signInWithGoogle = async () => {
         name: user.displayName,
         email: user.email,
         photo: user.photoURL,
+        rating: [],
         questionnaire: false,
         date: new Date()
       });
@@ -134,6 +136,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
         photo: "./assets/DefaultUser.JPG",
         email,
         questionnaire: false,
+        rating: [],
         date: new Date()
       });
       return "Success"

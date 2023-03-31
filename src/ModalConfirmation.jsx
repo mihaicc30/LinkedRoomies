@@ -36,7 +36,7 @@ function Modal({setOpenModal,message, type, handleDelete, modalMessage, handleKi
 
               Waiting...
               </p>
-              <p>{`Are you sure you wish to proceed to ${message == "Kick Out" ? "kick user out ?": "delete this account? Process is ireversible."}`}</p>
+              <p>{`Are you sure you wish to proceed to ${message == "Send Eviction" ? "send a eviction notice and kick user out ?": "delete this account? Process is ireversible."}`}</p>
               <p>
                 <button  onClick={handleConfirmation} className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2 outline-none px-6 py-3"> Yes </button>
               </p>

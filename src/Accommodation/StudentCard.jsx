@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { matchUsers, overallMatch } from "../Config/MatchFunction";
+import UserRating from './UserRating'
 
 const StudentCard = ({data, myself}) => {
     const [match, matchState] = useState(0)
+    const [triggerRefresh, setTriggerRefresh] = useState(false)
       
     useEffect(() => {
         async function fetchData() {
@@ -29,7 +31,9 @@ const StudentCard = ({data, myself}) => {
         
         <div className="flex flex-nowrap flex-col items-center max-w-[200px] my-3 animate-fadeUP1" >
             {myself != "x" &&<p>{match} Match</p> }
+            <UserRating key={crypto.randomUUID()} data={data.rating} currUser={data.uid} roomieUser={data.uid} tr={setTriggerRefresh} infoOnly={true}/>
             <p className="font-bold text-center " style={nameStyle}>{data.name}</p>
+            
             <img className=" p-1 h-[100px] w-[100px] rounded-xl shadow-lg shadow-stone-900" src={data.photo} alt={data.name+" Avatar"}/>
         </div>
         {data.attr && 

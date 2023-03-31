@@ -115,7 +115,8 @@ function Register() {
 						Register
 					</button>
 					<div className="flex flex-col">
-					{errors.length > 0 && errors.map((err,i) => (
+						{console.log(errors)}
+					{errors && errors.map((err,i) => (
 						<p key={i} className="text-red-400">🔻{err}</p>
 					))}
 

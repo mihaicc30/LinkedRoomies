@@ -12,6 +12,7 @@ import {Logo} from '../assets/logo.jsx';
 import ScrollToTopButton from '../ScrollToTopButton.jsx'
 import Nav from '../Navigation/Nav'
 
+import UserRating from './UserRating'
 import { matchUsers, overallMatch } from "../Config/MatchFunction";
 
 function Accommodation() {
@@ -25,9 +26,11 @@ function Accommodation() {
   const [sortingType, setSortingType] = useState("location")
   const [sortingOrder, setSortingOrder] = useState("asc")
 
+  const [userRatings, setUserRatings] = useState(false)
   const [userRoom, setUserRoom] = useState(false)
   const [userData, setUserData] = useState()
   const [questionnaire, setQuestionnaire] = useState(true)
+  const [triggerRefresh, setTriggerRefresh] = useState(false)
 
   
   const [filter, setfilter] = useState({
@@ -84,6 +87,7 @@ function Accommodation() {
       setName(data.name)
       setNamePhoto(data.photo)
       setQuestionnaire(data.questionnaire)
+      setUserRatings(data.rating)
       
     } catch (err) {
       console.error(err);
@@ -151,7 +155,6 @@ function Accommodation() {
 
   }
 
-
   return (
     <>
     {!questionnaire &&
@@ -178,11 +181,23 @@ function Accommodation() {
         <div className="flex flex-col justify-evenly items-center relative">
           <img className="ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl m-2 w-[auto] h-[150px] scale-[1] mx-5" src={userRoom.imgs[0]}/>
           <p className="absolute top-[18%] left-[50%] py-1 px-4 translate-x-[-50%] translate-y-[-50%] rounded-lg font-bold bg-gradient-to-r from-gray-300 to-white ">{userRoom.location}</p>
-      </div>
-      <div className="flex flex-row justify-evenly items-center">
+          <div className="absolute top-0 right-[-25%] p-3 bg-red-200 rounded-3xl flex z-30" id="tempPopup">
+            <span className="border-2 border-white p-2 rounded-full my-auto mx-2">❔</span>
+            <div className="flex flex-col">
+              <p>Rate </p>
+              <p>your</p>
+              <p>roomies!</p>
+            </div>
+            <p className="arrRight text-white font-bold text-5xl">➡</p>
 
-          <div className="flex flex-col justify-between items-center h-[100%] mt-2 w-[90px]">
+            </div>
+        </div>
+      <div className="flex flex-row justify-evenly items-center relative">
+
+          <div className="flex flex-col items-center h-[100%] mt-2 w-[90px] animate-fadeUP1">
+            <UserRating key={crypto.randomUUID()} data={userRatings} currUser={userRatings} roomieUser={userRatings} tr={setTriggerRefresh} infoOnly={true}/>
             <img src={namePhoto} className="h-[70px] w-[70px] bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.2] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-full"/>
+
             <button className="font-bold bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 m-2 py-2 px-5 rounded-xl " onClick={handleUserLeave}>Leave</button>
           </div>
         {userRoom.students.length > 1 &&
