@@ -59,21 +59,12 @@ function Login() {
     
       case "signInWithGoogle":
         console.log("Opening google login popup.");
-        try {
-          setErrors("")
-          await signInWithGoogle()
-        } catch (error) {
-          console.log("checking for errors google 2");
-          switch (error.message) {
-            case "Error (auth/popup-closed-by-user).":
-              setErrors("User closed popup."); 
-              break;
-          
-            default:
-              break;
-          }
-      }
-      break;
+        await signInWithGoogle()
+        break;
+      case "signInWithFacebook":
+        await signInWithFacebook()
+        break;
+        
       default:
         break;
     }
@@ -115,7 +106,7 @@ function Login() {
             <Google/>
           </button>
 
-          <button className="text-center m-auto bg-gradient-to-r from-transparent" onClick={signInWithFacebook}>
+          <button className="text-center m-auto bg-gradient-to-r from-transparent" onClick={() => handleLogin("signInWithFacebook")}>
             <Facebook/>
           </button>
         </div>

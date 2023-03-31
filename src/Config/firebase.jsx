@@ -62,17 +62,13 @@ const signInWithFacebook = async() => {
         uid: user.uid,
         name: user.displayName,
         email: user.email,
-        photo: user.photoURL,
+        photo: URL.createObjectURL(blob),
         rating: [],
         questionnaire: false,
         date: new Date()
       });
       console.log("User does not exists in Firestore. New user added with ID: ", newUserRef.id);
     } else {
-      const docRef = await doc(db, 'users', q.docs[0].id)
-      await updateDoc(docRef, {
-        photo: URL.createObjectURL(blob),
-      })
       console.log("User already exists in Firestore. No updates needed.");
     }
 
