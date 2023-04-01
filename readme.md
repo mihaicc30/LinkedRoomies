@@ -2,18 +2,9 @@
 # Welcome to LinkedRoomies GitHub!
 
   
-  
-
-# LinkedRoomies
-
-  
-
-| Types of user | Actions
-
+|Project:|LinkedRoomies |
 |---------------------|-------------------------------|
-
 |Student:|10148467 |
-
 |Live:|[-Link-](https://linkroomie.web.app)| |
 
   
