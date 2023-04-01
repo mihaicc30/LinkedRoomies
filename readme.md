@@ -97,11 +97,8 @@ In the base folder a .end file need to be created where the environment variable
   
 
 | Types of user | Actions
-
 |---------------------|-------------------------------|
-
 |Admin |CRUD Students/Rooms/Messages/Profile |
-
 |Student |CRUD Profile, Join/Leave Room, Enquiries |
 
   
