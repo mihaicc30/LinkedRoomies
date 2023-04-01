@@ -29,15 +29,15 @@ Install the necessary dependencies: **npm install**
 
 
 Create a file named ".env" and paste the following env variables:
-<kbd>
-VITE_API_KEY=AIzaSyDKArkX1EuHeIHQ65pt_DdBTy4xv4YLeyk
-VITE_AUTH_DOMAIN=linkroomie.firebaseapp.com
-VITE_PROJECT_ID=linkroomie
-VITE_STORAGE_BUCKET=linkroomie.appspot.com
-VITE_MESSAGING_SENDER_ID=893976725172
-VITE_APP_ID=1:893976725172:web:e71a87aa4edc7c53e839e1
- VITE_MEASUREMENT_ID=G-9PLSXMVL7J
-</kbd>
+|   |
+| :--------------------- |
+|VITE_API_KEY=AIzaSyDKArkX1EuHeIHQ65pt_DdBTy4xv4YLeyk|
+|VITE_AUTH_DOMAIN=linkroomie.firebaseapp.com|
+|VITE_PROJECT_ID=linkroomie|
+|VITE_STORAGE_BUCKET=linkroomie.appspot.com|
+|VITE_MESSAGING_SENDER_ID=893976725172|
+|VITE_APP_ID=1:893976725172:web:e71a87aa4edc7c53e839e1|
+|VITE_MEASUREMENT_ID=G-9PLSXMVL7J|
   
 
 Start the development server: **npm run dev**
