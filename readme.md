@@ -71,7 +71,7 @@ You need to start the development server using Vite's start command as shown
 | Types of user | Actions
 |---------------------|-------------------------------|
 |Admin |CRUD Students/Rooms/Messages/Profile |
-|Student |CRUD Profile, Join/Leave Room, Enquiries |
+|Student |CRUD Profile, Join/Leave Room, Enquiries, Reviews |
 
 ## Data Flow Chart:
 
