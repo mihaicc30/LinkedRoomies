@@ -73,7 +73,7 @@ You need to start the development server using Vite's start command as shown
 |Admin |CRUD Students/Rooms/Messages/Profile |
 |Student |CRUD Profile, Join/Leave Room, Enquiries, Reviews |
 
-## Data Flow Chart:
+## Data Flow Chart
 
 ```mermaid
 graph TD
