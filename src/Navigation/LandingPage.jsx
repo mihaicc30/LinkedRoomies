@@ -1,4 +1,4 @@
-import "../App.css";
+
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Config/firebase";

@@ -1,5 +1,5 @@
 
-import "../App.css";
+
 import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Logo } from '../assets/logo.jsx';

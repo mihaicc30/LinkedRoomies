@@ -1,4 +1,4 @@
-import "../App.css";
+
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, NavLink } from "react-router-dom";

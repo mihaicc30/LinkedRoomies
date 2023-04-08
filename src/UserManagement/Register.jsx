@@ -1,4 +1,4 @@
-import "../App.css";
+
 import React, { useEffect, useState } from "react";
 import { Google } from "../assets/Google.jsx";
 import { Facebook } from '../assets/Facebook.jsx';
