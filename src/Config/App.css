@@ -917,80 +917,88 @@ button[disabled]:hover {
     -ms-transform: translateX(2rem);
     -o-transform: translateX(2rem);
   }
+
   30% {
-       opacity: 1;
-       transform: translateX(0rem);
-       -webkit-transform: translateX(0rem);
-       -moz-transform: translateX(0rem);
-       -ms-transform: translateX(0rem);
-       -o-transform: translateX(0rem);
+    opacity: 1;
+    transform: translateX(0rem);
+    -webkit-transform: translateX(0rem);
+    -moz-transform: translateX(0rem);
+    -ms-transform: translateX(0rem);
+    -o-transform: translateX(0rem);
   }
+
   80% {
-       opacity: 1;
-       transform: translateX(0rem);
-       -webkit-transform: translateX(0rem);
-       -moz-transform: translateX(0rem);
-       -ms-transform: translateX(0rem);
-       -o-transform: translateX(0rem);
+    opacity: 1;
+    transform: translateX(0rem);
+    -webkit-transform: translateX(0rem);
+    -moz-transform: translateX(0rem);
+    -ms-transform: translateX(0rem);
+    -o-transform: translateX(0rem);
   }
+
   100% {
-       opacity: 0;
-       transform: translateX(-2rem);
-       -webkit-transform: translateX(-2rem);
-       -moz-transform: translateX(-2rem);
-       -ms-transform: translateX(-2rem);
-       -o-transform: translateX(-2rem);
-}
+    opacity: 0;
+    transform: translateX(-2rem);
+    -webkit-transform: translateX(-2rem);
+    -moz-transform: translateX(-2rem);
+    -ms-transform: translateX(-2rem);
+    -o-transform: translateX(-2rem);
+  }
 }
 
 @keyframes showfromleft2 {
   0% {
     opacity: 0;
-    transform: translate(-50%, 4rem) ;
-    -webkit-transform: translate(-50%, 4rem) ;
-    -moz-transform: translate(-50%, 4rem) ;
-    -ms-transform: translate(-50%, 4rem) ;
-    -o-transform: translate(-50%, 4rem) ;
-}
+    transform: translate(-50%, 4rem);
+    -webkit-transform: translate(-50%, 4rem);
+    -moz-transform: translate(-50%, 4rem);
+    -ms-transform: translate(-50%, 4rem);
+    -o-transform: translate(-50%, 4rem);
+  }
+
   30% {
-       opacity: 1;
-       transform: translate(-50%, 4rem) ;
-       -webkit-transform: translate(-50%, 4rem) ;
-       -moz-transform: translate(-50%, 4rem) ;
-       -ms-transform: translate(-50%, 4rem) ;
-       -o-transform: translate(-50%, 4rem) ;
-}
+    opacity: 1;
+    transform: translate(-50%, 4rem);
+    -webkit-transform: translate(-50%, 4rem);
+    -moz-transform: translate(-50%, 4rem);
+    -ms-transform: translate(-50%, 4rem);
+    -o-transform: translate(-50%, 4rem);
+  }
+
   80% {
-       opacity: 1;
-       transform: translate(-50%, 4rem) ;
-       -webkit-transform: translate(-50%, 4rem) ;
-       -moz-transform: translate(-50%, 4rem) ;
-       -ms-transform: translate(-50%, 4rem) ;
-       -o-transform: translate(-50%, 4rem) ;
-}
+    opacity: 1;
+    transform: translate(-50%, 4rem);
+    -webkit-transform: translate(-50%, 4rem);
+    -moz-transform: translate(-50%, 4rem);
+    -ms-transform: translate(-50%, 4rem);
+    -o-transform: translate(-50%, 4rem);
+  }
+
   100% {
-       opacity: 0;
-       transform: translate(-50%, 4rem) ;
-       -webkit-transform: translate(-50%, 4rem) ;
-       -moz-transform: translate(-50%, 4rem) ;
-       -ms-transform: translate(-50%, 4rem) ;
-       -o-transform: translate(-50%, 4rem) ;
-}
+    opacity: 0;
+    transform: translate(-50%, 4rem);
+    -webkit-transform: translate(-50%, 4rem);
+    -moz-transform: translate(-50%, 4rem);
+    -ms-transform: translate(-50%, 4rem);
+    -o-transform: translate(-50%, 4rem);
+  }
 }
 
 @media screen and (min-width: 613px) {
 
-  #tempPopup{
+  #tempPopup {
     animation: showfromleft 3s forwards;
     -webkit-animation: showfromleft 3s forwards;
+  }
 }
-}
+
 @media screen and (max-width: 613px) {
 
-  #tempPopup{
+  #tempPopup {
     animation: showfromleft2 3s forwards;
     -webkit-animation: showfromleft2 3s forwards;
-}
+  }
+
   .arrRight {
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
