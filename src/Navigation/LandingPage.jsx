@@ -1,12 +1,12 @@
-import "./App.css";
+import "../App.css";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "./Config/firebase";
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 // Svgs
-import {Logo} from './assets/logo.jsx';
-import {Google} from './assets/Google.jsx';
+import {Logo} from '../assets/logo.jsx';
+import {Google} from '../assets/Google.jsx';
 
 
 const LandingPage = () => {

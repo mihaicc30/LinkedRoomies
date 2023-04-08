@@ -13,7 +13,12 @@ import {
 	updateDoc,
 } from "firebase/firestore";
 import Modal from "../Modal.jsx";
-import { getAuth, updateProfile, updateEmail } from "firebase/auth";
+import {
+	getAuth,
+	updateProfile,
+	updateEmail,
+	updatePassword,
+} from "firebase/auth";
 
 import { DefaultUser } from "../assets/DefaultUser.jsx";
 import { Logo } from "../assets/logo.jsx";
@@ -30,6 +35,7 @@ function Profile() {
 	const [nameAttr, setNameAttr] = useState(false);
 	const [nameTemp, setNameTemp] = useState("");
 	const [PhotoTemp, setPhotoTemp] = useState("");
+	const [PasswordTemp, setPasswordTemp] = useState("");
 	const [EmailTemp, setEmailTemp] = useState("");
 
 	// to do : perform validation
@@ -92,6 +98,7 @@ function Profile() {
 					photoURL: PhotoTemp,
 				});
 				await updateEmail(userAuthAccount.currentUser, EmailTemp);
+				await updatePassword(auth.currentUser, PasswordTemp);
 			} else {
 				console.log("User is not authenticated");
 			}
@@ -113,6 +120,9 @@ function Profile() {
 		}
 		if (e.target.name == "email") {
 			setEmailTemp(e.target.value);
+		}
+		if (e.target.name == "password") {
+			setPasswordTemp(e.target.value);
 		}
 	};
 
@@ -158,6 +168,18 @@ function Profile() {
 								required
 							/>
 							<label>Avatar</label>
+						</div>
+
+						<div className="form styled-input max-[700px]:w-[80vw] min-[701px]:w-[50vw] max-w-[400px]  animate-fadeUP2">
+							<input
+								type="password"
+								name="password"
+								defaultValue={""}
+								onChange={handleChange}
+								required
+								auto="false"
+							/>
+							<label>Password</label>
 						</div>
 
 						<button className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-2 px-4 font-bold">

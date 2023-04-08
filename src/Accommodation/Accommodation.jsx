@@ -277,11 +277,11 @@ function Accommodation() {
       </div>
 
       {/* Rooms */}
-      <div ref={roomsRef} className="listedRooms flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative ">
+      <div ref={roomsRef} className="listedRooms flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative">
 
           <p className="absolute top-[0%] border-b-2 border-[red] font-bold whitespace-nowrap">-Rooms-</p>
           {/*start of post of room*/}  
-          <div className="flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative" id="roomsLength">
+          <div className="flex flex-row flex-wrap gap-4 justify-center pt-[2rem] relative  pb-[5rem]" id="roomsLength">
             { rooms.map((room,i)=> 
             <Room key={room.uid} triggerRefresh={setTrig} me={userData} data={room} aniDelay={i} filters={filter} userIsInRoom={userRoom.uid}/> 
             )}

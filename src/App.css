@@ -42,6 +42,7 @@ main {
   bottom: 0px;
   z-index: 2;
   overflow-y: scroll;
+  padding-bottom: 5rem;
   /* Add scrollbars to the content area */
 }
 
@@ -201,6 +202,7 @@ main {
   -moz-border-radius: 14px;
   -ms-border-radius: 14px;
   -o-border-radius: 14px;
+  outline: none;
 }
 
 .styled-input textarea {
@@ -208,7 +210,7 @@ main {
   background-color: white;
   color: black;
   border-radius: 14px;
-  border: 1px solid black;
+  border: 1px solid rgb(207, 207, 207);
   padding: 10px;
   -webkit-border-radius: 14px;
   -moz-border-radius: 14px;

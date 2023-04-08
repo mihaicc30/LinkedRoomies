@@ -5,7 +5,7 @@ import Logout from "./UserManagement/Logout";
 import Register from "./UserManagement/Register";
 import Reset from "./UserManagement/Reset";
 
-import LandingPage from "./LandingPage";
+import LandingPage from "./Navigation/LandingPage";
 
 import Admin from "./Admin/Admin";
 
