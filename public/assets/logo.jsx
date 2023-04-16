@@ -1,6 +1,7 @@
 export const Logo = () => {
   return (
     <svg
+    className="ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl m-1 outline-none"
     viewBox="0 0 640 400"
     data-background-color="#ee3e38"
     preserveAspectRatio="xMidYMid meet"

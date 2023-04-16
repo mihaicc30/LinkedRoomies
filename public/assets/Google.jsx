@@ -2,12 +2,13 @@ export const Google = () => {
   return (
     <>
    <svg
+   className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-full p-1 outline-none"
     id="Icons"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
     xmlSpace="preserve"
-    width={25}
-    height={25}
+    width={45}
+    height={45}
     fill="#000"
   >
     <g id="SVGRepo_iconCarrier">

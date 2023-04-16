@@ -2,7 +2,7 @@ export const Facebook = () => {
     return (
       <>
   <svg
-  className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-full p-0 outline-none"
+  className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-full outline-none"
     width={45}
     height={45}
     viewBox="0 0 32 32"
