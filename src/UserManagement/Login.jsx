@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -22,7 +21,7 @@ function Login() {
 	const [err, setErrors] = useState([]);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	
+
 	const [user, loading, error] = useAuthState(auth);
 	const navigate = useNavigate();
 
@@ -34,57 +33,55 @@ function Login() {
 		if (user) navigate("/dashboard");
 	}, [user, loading, err]);
 
-	
-
 	const handleLogin = async (method) => {
-		
 		switch (method) {
 			case "logInWithEmailAndPassword":
 				try {
 					setErrors([]);
-					let errors = []
+					let errors = [];
 					let testingString =
 						/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 					if (!email) {
-						errors.push("Email required.")
+						errors.push("Email required.");
 					} else if (!testingString.test(email)) {
-						errors.push("Email invalid.")
+						errors.push("Email invalid.");
 					}
 
 					if (!password) {
-						errors.push("Password required.")
+						errors.push("Password required.");
 					} else if (password.length < 3) {
-						errors.push("Password too short.")
+						errors.push("Password too short.");
 					}
-					
-					if(errors.length > 0) {
-						errors.map((err,i) => setErrors(prevErrors => [...prevErrors, err]))
+
+					if (errors.length > 0) {
+						errors.map((err, i) =>
+							setErrors((prevErrors) => [...prevErrors, err]),
+						);
 					} else {
 						await logInWithEmailAndPassword(email, password);
 					}
-
 				} catch (error) {
 					console.log(error.message);
 					switch (error.message) {
 						case "Firebase: Error (auth/user-not-found).":
-							setErrors("User is not found.");
+							setErrors("User is not found. ");
 							break;
 
 						case "Firebase: Error (auth/wrong-password).":
-							setErrors("Password is incorrect.");
+							setErrors("Password is incorrect. ");
 							break;
 
 						case "Firebase: Error (auth/internal-error).":
-							setErrors("Login fields are not valid.");
+							setErrors("Login fields are not valid. ");
 							break;
 
 						case "Firebase: Error (auth/invalid-email).":
-							setErrors("Login fields are not valid.");
+							setErrors("Login fields are not valid. ");
 							break;
-              
+
 						case "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).":
 							setErrors(
-								"Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
+								"Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. ",
 							);
 							break;
 
@@ -119,7 +116,7 @@ function Login() {
 						className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2 outline-none"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						placeholder="E-mail Address"
+						placeholder="Email Address"
 					/>
 					<input
 						type="password"
@@ -134,13 +131,11 @@ function Login() {
 						Login
 					</button>
 
-					{err && err.map((er, i) => (
-						<p key={i} className="text-red-400">
-							🔻{er}
-						</p>
-					))}
-
-
+					{err && err.length > 0 &&
+							<p className="text-red-400 mt-3 animate-fadeUP1">
+								🔻{err}
+							</p>
+						}
 
 					<p className="my-5">- or -</p>
 

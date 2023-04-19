@@ -114,7 +114,7 @@ function Register() {
 					</button>
 					<div className="flex flex-col">
 					{errors && errors.map((err,i) => (
-						<p key={i} className="text-red-400">🔻{err}</p>
+						<p key={i} className="text-red-400 animate-fadeUP1">🔻{err}</p>
 					))}
 
 
