@@ -19,9 +19,10 @@ import { Google } from "../assets/Google.jsx";
 import { Facebook } from "../assets/Facebook.jsx";
 
 function Login() {
-	const [err, setErrors] = useState("");
+	const [err, setErrors] = useState([]);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	
 	const [user, loading, error] = useAuthState(auth);
 	const navigate = useNavigate();
 
@@ -33,13 +34,37 @@ function Login() {
 		if (user) navigate("/dashboard");
 	}, [user, loading, err]);
 
+	
+
 	const handleLogin = async (method) => {
+		
 		switch (method) {
 			case "logInWithEmailAndPassword":
 				try {
-					await logInWithEmailAndPassword(email, password);
-					setErrors("");
+					setErrors([]);
+					let errors = []
+					let testingString =
+						/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+					if (!email) {
+						errors.push("Email required.")
+					} else if (!testingString.test(email)) {
+						errors.push("Email invalid.")
+					}
+
+					if (!password) {
+						errors.push("Password required.")
+					} else if (password.length < 3) {
+						errors.push("Password too short.")
+					}
+					
+					if(errors.length > 0) {
+						errors.map((err,i) => setErrors(prevErrors => [...prevErrors, err]))
+					} else {
+						await logInWithEmailAndPassword(email, password);
+					}
+
 				} catch (error) {
+					console.log(error.message);
 					switch (error.message) {
 						case "Firebase: Error (auth/user-not-found).":
 							setErrors("User is not found.");
@@ -109,11 +134,13 @@ function Login() {
 						Login
 					</button>
 
-					{err && (
+					{err && err.map((er, i) => (
 						<p key={i} className="text-red-400">
-							🔻{err}
+							🔻{er}
 						</p>
-					)}
+					))}
+
+
 
 					<p className="my-5">- or -</p>
 

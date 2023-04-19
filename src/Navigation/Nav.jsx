@@ -63,9 +63,9 @@ const Nav = () => {
                 
                     <ul className="flex flex-row gap-4 p-2 justify-center items-center max-[750px]:hidden">
                             <li className=" animate-fadeUP1">
-                            <NavLink to="/dashboard" activeclassname={"active"} className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-[1vh] px-[2vw]">
-                                Home
-                            </NavLink>
+                              <NavLink to="/dashboard" activeclassname={"active"} className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-[1vh] px-[2vw]">
+                                  Home
+                              </NavLink>
                             </li>
                             <li className=" animate-fadeUP2">
                             <NavLink to="/accommodation" activeclassname={"active"} className="bg-gradient-to-t from-gray-200 to-transparent hover:scale-[1.05] hover:contrast-[1.2] ease-in duration-300 shadow-md shadow-gray-900/30 rounded-xl py-[1vh] px-[2vw]">

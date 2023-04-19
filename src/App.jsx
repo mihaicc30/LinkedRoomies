@@ -26,6 +26,7 @@ import Layout from "./Navigation/Layout";
 function App() {
 	return (
 		<div className="app">
+			
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Layout />}>
