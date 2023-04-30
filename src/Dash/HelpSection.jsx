@@ -24,7 +24,7 @@ const HelpSection = () => {
 						xmlns="http://www.w3.org/2000/svg"
 						xmlSpace="preserve"
 						width={200}
-            className="mx-auto border-2 border-[#42210b] rounded-full"
+						className="mx-auto border-2 border-[#42210b] rounded-full"
 						height={200}
 						stroke="#000"
 						strokeWidth={0.005}

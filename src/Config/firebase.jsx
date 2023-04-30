@@ -163,6 +163,7 @@ const logout = () => {
 };
 
 export {
+	app,
 	auth,
 	db,
 	signInWithPopup,

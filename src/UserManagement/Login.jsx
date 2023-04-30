@@ -96,6 +96,7 @@ function Login() {
 				await signInWithGoogle();
 				break;
 			case "signInWithFacebook":
+				console.log("Opening facebook login popup.");
 				await signInWithFacebook();
 				break;
 
