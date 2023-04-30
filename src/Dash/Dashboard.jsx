@@ -57,7 +57,7 @@ function Dashboard() {
 	return (
 		<main className="w-[100%] flex flex-col ">
 			<Landing />
-			<About />
+			{/* <About /> */}
 			<Attributes />
 			<TimelineSteps />
 			<FromTheTeam />
