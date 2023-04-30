@@ -7,7 +7,7 @@ export default function Landing({}) {
 	return (
 		<>
 			<div className="flex gap-[1vw] mb-[6rem] max-[888px]:flex-col justify-evenly">
-				<div className="flex flex-col justify-center basis-[40%] p-[2vw]">
+				<div className="flex flex-col justify-center basis-[40%] p-[2vw] mx-auto">
 					<p className="animate-fadeDOWN hhtx">
 						The most secure and fastest way to find a place to stay.
 					</p>

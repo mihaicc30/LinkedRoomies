@@ -34,8 +34,13 @@ header {
 
 header {
   top: 0;
+  max-width: 1800px;
+  margin: 0 auto;
 }
-
+.app{
+  display: flex;
+  justify-content: center;
+}
 main {
   position: fixed;
   top: 125px;
@@ -43,7 +48,7 @@ main {
   z-index: 2;
   overflow-y: scroll;
   padding-bottom: 5rem;
-  /* Add scrollbars to the content area */
+  max-width: 1800px;
 }
 
 .dashboard {
