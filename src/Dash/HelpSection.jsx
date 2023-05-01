@@ -9,7 +9,7 @@ const HelpSection = () => {
 
 			<div className="flex flex-wrap items-center justify-center p-4 gap-[4rem] animate-fadeUP3 ">
 				<div className="w-[60vw] max-[600px]:w-[90vw] ">
-					<p>
+					<p className="max-w-[900px] mx-auto">
 						If you need help, you have two options. You can either use the{" "}
 						<span className="text-red-400">contact page</span> to write an email
 						explaining your issue or go onto the{" "}

@@ -37,7 +37,10 @@ header {
   max-width: 1800px;
   margin: 0 auto;
 }
-.app{
+.app:not(:has(main)){
+  display: unset;
+}
+.app:has(main){
   display: flex;
   justify-content: center;
 }
@@ -48,7 +51,6 @@ main {
   z-index: 2;
   overflow-y: scroll;
   padding-bottom: 5rem;
-  max-width: 1800px;
 }
 
 .dashboard {
