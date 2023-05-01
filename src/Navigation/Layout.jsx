@@ -11,6 +11,10 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import LandingPage from "./LandingPage";
 
 function Layout() {
+
+	const [user, loading, error] = useAuthState(auth);
+	const [userStatus, setUserStatus] = useState(false);
+	
 	const fetchUserStatus = async () => {
 		if (!user) return;
 		try {
@@ -29,10 +33,6 @@ function Layout() {
 		}
 	};
 
-	const navigate = useNavigate();
-
-	const [user, loading, error] = useAuthState(auth);
-	const [userStatus, setUserStatus] = useState(false);
 
 	useEffect(() => {
 		if (loading) return;

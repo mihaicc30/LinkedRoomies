@@ -162,22 +162,14 @@ function Login() {
 						</Link>
 					</div>
 					<div className="my-4">
-						Don't have an account?{" "}
+						Don't have an account?
 						<Link
 							className="text-[#ff5858] bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2 outline-none "
 							to="/register">
 							Register
-						</Link>{" "}
+						</Link>
 						now.
 					</div>
-					{/* 
-        <div
-          className="fb-like"
-          data-share="true"
-          data-width="450"
-          data-show-faces="true">
-        </div> */}
-
 					<div>
 						<button
 							href="#"
