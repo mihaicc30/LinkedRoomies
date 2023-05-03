@@ -6,6 +6,7 @@ import { auth, db, logout } from "../Config/firebase";
 import {
 	query,
 	collection,
+	getFirestore,
 	getDocs,
 	getDoc,
 	where,
@@ -23,6 +24,9 @@ import Nav from "../Navigation/Nav";
 
 import UserRating from "./UserRating";
 import { matchUsers, overallMatch } from "../Config/MatchFunction";
+
+import { useCollectionData } from "react-firebase-hooks/firestore";
+const firestore = getFirestore();
 
 function Accommodation() {
 	const navigate = useNavigate();
@@ -52,38 +56,37 @@ function Accommodation() {
 
 	const roomsRef = useRef();
 
-	async function fetchRooms() {
-		const docs = await getDocs(
-			query(collection(db, "rooms"), orderBy(sortingType, sortingOrder)),
-		);
+	const ref = collection(firestore, "rooms");
+	const q = query(ref, orderBy(sortingType, sortingOrder));
+	const [roomRawData] = useCollectionData(q);
 
-		const roomDataPromises = docs.docs.map(async (room) => {
-			const data = room.data();
-			const students = await Promise.all(
-				data.students
-					? data.students.map(async (student) => {
-							if (user?.uid == student) setUserRoom(data);
+	// async function fetchRooms() {
+	// 	const roomDataPromises = roomRawData.map(async (data) => {
+	// 		const students = await Promise.all(
+	// 			data.students
+	// 				? data.students.map(async (student) => {
+	// 						if (user?.uid == student) setUserRoom(data);
 
-							const q = await query(
-								collection(db, "users"),
-								where("uid", "==", student),
-							);
-							const doc = await getDocs(q);
-							return doc.docs[0].data();
-					  })
-					: 0,
-			);
-			const roomData = { ...data, students };
-			return roomData;
-		});
+	// 						const q = await query(
+	// 							collection(db, "users"),
+	// 							where("uid", "==", student),
+	// 						);
+	// 						const doc = await getDocs(q);
+	// 						return doc.docs[0].data();
+	// 				  })
+	// 				: 0,
+	// 		);
+	// 		const roomData = { ...data, students };
+	// 		return roomData;
+	// 	});
 
-		const results = await Promise.allSettled(roomDataPromises);
-		const successfulResults = results
-			.filter((result) => result.status === "fulfilled")
-			.map((result) => result.value);
+	// 	const results = await Promise.allSettled(roomDataPromises);
+	// 	const successfulResults = results
+	// 		.filter((result) => result.status === "fulfilled")
+	// 		.map((result) => result.value);
 
-		setRooms(successfulResults);
-	}
+	// 	setRooms(successfulResults);
+	// }
 
 	const fetchUserName = async () => {
 		if (!user) return;
@@ -106,17 +109,43 @@ function Accommodation() {
 		}
 	};
 
+	
+	const fetchRooms = async () => {
+		const roomDataPromises = roomRawData.map(async (data) => {
+		  const students = await Promise.all(
+			data.students
+			  ? data.students.map(async (student) => {
+				  if (user?.uid == student) setUserRoom(data);
+  
+				  const q = query(collection(db, "users"), where("uid", "==", student));
+				  const doc = await getDocs(q);
+				  return doc.docs[0].data();
+				})
+			  : 0
+		  );
+		  const roomData = { ...data, students };
+		  return roomData;
+		});
+  
+		const results = await Promise.allSettled(roomDataPromises);
+		const successfulResults = results
+		  .filter((result) => result.status === "fulfilled")
+		  .map((result) => result.value);
+  
+		setRooms(successfulResults);
+	  };
+  
+
 	useEffect(() => {
-		if (loading) {
-			return;
-		} else if (!user) {
-			return navigate("/");
-		} else {
-			fetchUserName();
-			fetchRooms();
-			setTrig(false);
-		}
-	}, [user, loading, sortingOrder, sortingType, trig, filter]);
+		if (loading) return;
+		if (!user) return navigate("/");
+		if (!roomRawData) return;
+
+		console.log("aAAAAAAAAAAA");
+		fetchUserName();
+		fetchRooms();
+		setTrig(false);
+	}, [sortingOrder, sortingType, trig, filter, roomRawData]);
 
 	function handleFilter(event) {
 		if (event.target.className.startsWith("maxppl")) {

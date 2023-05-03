@@ -102,7 +102,7 @@ const Room = (props) => {
     if (showComponent && showFilteredComponent)
         return (
             <>
-                <div key={crypto.randomUUID()} className="flex flex-col basis-1/4 justify-evenly border-2 p-4 animate-fadeUP1 min-w-[260px] min-h-[260px]" >
+                <div key={crypto.randomUUID()} className="flex flex-col basis-1/4 justify-evenly border-2 p-4 animate-fadeUP1 min-w-[260px] max-w-[270px] min-h-[300px] max-h-[380px]" >
                     {/* future idea : below to insert a slideshow of pics */}
                     <img src={data.imgs[0]} alt="avatar" className="my-4 w-[100%] rounded shadow-lg shadow-[#000] p-[2px] animate-fadeUP1" />
 
@@ -190,7 +190,7 @@ const Room = (props) => {
                                 }
 
                                 <div className="fixed inset-0 z-[50] hidden items-center justify-center bg-[#000000e6] gap-[2rem] text-sm" id={data.uid} >
-                                    <div className="fixed top-[150px] bottom-[5vw] right-[5vw] left-[5vw]  flex flex-col flex-nowrap justify-center gap-[1rem] align-center items-center bg-[#f1f1f1] animate-fadeIN max-w-[900px] overflow-auto max-[780px]:flex-col rounded-lg">
+                                    <div className="fixed top-[150px] bottom-[5vw] right-[5vw] left-[5vw]  flex flex-col flex-nowrap justify-center gap-[1rem] align-center items-center bg-[#f1f1f1] animate-fadeIN max-w-[900px] overflow-auto max-[780px]:flex-col rounded-lg mx-auto">
                                         
                                         <div className="flex flex-col h-[100%] items-center p-6">
                                             <StudentCard data={props.me} myself={"x"} key={props.me.uid}/>
