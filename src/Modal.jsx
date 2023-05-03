@@ -2,11 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { auth, db, logout } from "./Config/firebase";
 import { query, collection, getDocs, where, setDoc, doc, updateDoc  } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-// import { useNavigate, NavLink } from "react-router-dom";
 
 function Modal({theID, setOpenModal,message, type, roomID}) {
-  // const navigate = useNavigate();
-
 
   const [user, loading, error] = useAuthState(auth);
 

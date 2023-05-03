@@ -50,13 +50,11 @@ function Contact() {
 	};
 
 	useEffect(() => {
-		if (loading) {
-			return;
-		} else if (!user) {
-			return navigate("/");
-		} else {
-			fetchUserName();
-		}
+		if (loading) return
+		if (!user) return navigate("/");
+			
+		fetchUserName();
+		
 	}, [user, loading]);
 
 	const handleSubmit = async (e) => {

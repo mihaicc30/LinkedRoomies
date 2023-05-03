@@ -7,14 +7,14 @@ function Modal({setOpenModal,message, type, handleDelete, modalMessage, handleKi
 
   const [user, loading, error] = useAuthState(auth);
   
-  const handleConfirmation = () =>{
-    if(message == "Kick Out") {
-      console.log("Proceed to kick out user.");
-      handleKick(qID)
+  const handleConfirmation = async() =>{
+    if(message == "Send Eviction") {
+      console.log("Sending Eviction to user.");
+      await handleKick(qID)
       handleCloseModal()
     } else if (message == "Delete Account"){
       console.log("Proceed to delete user account.");
-      handleDelete(qID)
+      await handleDelete(qID)
       handleCloseModal()
     }
   }
@@ -38,7 +38,7 @@ function Modal({setOpenModal,message, type, handleDelete, modalMessage, handleKi
               </p>
               <p>{`Are you sure you wish to proceed to ${message == "Send Eviction" ? "send a eviction notice and kick user out ?": "delete this account? Process is ireversible."}`}</p>
               <p>
-                <button  onClick={handleConfirmation} className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2 outline-none px-6 py-3"> Yes </button>
+                <button  onClick={()=>handleConfirmation()} className="bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2 outline-none px-6 py-3"> Yes </button>
               </p>
 
               <button className="closingClass bg-gradient-to-t from-gray-200 to-transparent ease-in duration-300 shadow-md shadow-gray-900/30 my-1 rounded-xl p-2 outline-none px-6 py-3" onClick={handleCloseModal}>Close</button>

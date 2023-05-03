@@ -41,6 +41,7 @@ function Dashboard() {
 
 	useEffect(() => {
 		if (loading) return;
+		if (!user) return navigate("/");
 		if (user) {
 			async function fetchData() {
 				const userStatus = await fetchUserStatus();
@@ -57,7 +58,6 @@ function Dashboard() {
 	return (
 		<main className="w-[100%] flex flex-col ">
 			<Landing />
-			{/* <About /> */}
 			<Attributes />
 			<TimelineSteps />
 			<FromTheTeam />

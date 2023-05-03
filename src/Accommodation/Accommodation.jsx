@@ -59,35 +59,7 @@ function Accommodation() {
 	const ref = collection(firestore, "rooms");
 	const q = query(ref, orderBy(sortingType, sortingOrder));
 	const [roomRawData] = useCollectionData(q);
-
-	// async function fetchRooms() {
-	// 	const roomDataPromises = roomRawData.map(async (data) => {
-	// 		const students = await Promise.all(
-	// 			data.students
-	// 				? data.students.map(async (student) => {
-	// 						if (user?.uid == student) setUserRoom(data);
-
-	// 						const q = await query(
-	// 							collection(db, "users"),
-	// 							where("uid", "==", student),
-	// 						);
-	// 						const doc = await getDocs(q);
-	// 						return doc.docs[0].data();
-	// 				  })
-	// 				: 0,
-	// 		);
-	// 		const roomData = { ...data, students };
-	// 		return roomData;
-	// 	});
-
-	// 	const results = await Promise.allSettled(roomDataPromises);
-	// 	const successfulResults = results
-	// 		.filter((result) => result.status === "fulfilled")
-	// 		.map((result) => result.value);
-
-	// 	setRooms(successfulResults);
-	// }
-
+	
 	const fetchUserName = async () => {
 		if (!user) return;
 		try {
@@ -141,11 +113,11 @@ function Accommodation() {
 		if (!user) return navigate("/");
 		if (!roomRawData) return;
 
-		console.log("aAAAAAAAAAAA");
 		fetchUserName();
 		fetchRooms();
 		setTrig(false);
 	}, [sortingOrder, sortingType, trig, filter, roomRawData]);
+
 
 	function handleFilter(event) {
 		if (event.target.className.startsWith("maxppl")) {
@@ -195,8 +167,6 @@ function Accommodation() {
 				students: updatedStudents,
 			});
 			setUserRoom(false);
-			fetchRooms();
-			// window.location.reload();
 		} else {
 			console.log("user not found");
 		}
