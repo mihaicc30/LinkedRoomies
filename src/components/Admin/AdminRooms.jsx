@@ -34,10 +34,9 @@ const AdminRooms = () => {
 		}
 	};
 
-
-  const roomsRef = collection(db, "rooms");
-  const queryRef = query(roomsRef, orderBy("location", "asc"));
-  const [rooooms] = useCollectionData(queryRef);
+	const roomsRef = collection(db, "rooms");
+	const queryRef = query(roomsRef, orderBy("location", "asc"));
+	const [rooooms] = useCollectionData(queryRef);
 
 	const getRooms = async () => {
 		const roooomsWithStudents = await Promise.all(
@@ -75,9 +74,8 @@ const AdminRooms = () => {
 		}
 	};
 
-  
 	useEffect(() => {
-    if(!rooooms) return
+		if (!rooooms) return;
 		getRooms();
 	}, [rooooms]);
 
