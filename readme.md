@@ -8,6 +8,19 @@
 |Live:|[-Link-](https://linkroomie.web.app)| |
 
   
+**Testing Accounts**
+
+> Admin
+
+Username: admin@admin.admin
+Password: admin@admin.admin
+  
+  > Student
+
+Username: alemihai25@gmail.com
+Password: alemihai25@gmail.com
+But please feel free to create your own account as a student. Email verification is not enabled on purpose and you can use GMail / Facebok / Email&Password to create / login to an account!
+
 
 **LinkedRoomies** is a dynamic web application that is built using the latest technologies, including React, Vite, Tailwind CSS, and Firebase. The aim of this project is to provide an efficient and reliable solution for university students who are searching for suitable accommodation and compatible roommates.
 
