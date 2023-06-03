@@ -19,8 +19,7 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 	const [location, setLocation] = useState("");
 	const [photo, setPhoto] = useState("");
 	const [pax, setPax] = useState(1);
-	const [ensuite, setEnsuite] = useState(false);
-
+	const [ensuite, setEnsuite] = useState(room[0].ensuite === "Yes" ? "true" : "false");
 	const [user, loading, error] = useAuthState(auth);
 
 	const handleegetRooms = () => {
@@ -88,10 +87,8 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 			);
 			const docx = await getDocs(q);
 			const docRef = await doc(db, "rooms", docx.docs[0].id);
-			const ensuiteString = ref.current.value == "true" ? "Yes" : "No";
-			console.log(ensuiteString);
 			await updateDoc(docRef, {
-				ensuite: ensuiteString,
+				ensuite: ref.current.value == "true" ? "Yes" : "No",
 				imgs: [photo],
 				location: location,
 				pax: parseInt(pax),
@@ -118,7 +115,6 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 			setPax(e.target.value);
 		}
 		if (e.target.name == "ensuite") {
-			console.log(e.target.value);
 			setEnsuite(e.target.value);
 		}
 	};
@@ -323,17 +319,18 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 											</div>
 
 											<div className="form mt-[10px] w-[45%] animate-fadeUP1 flex flex-col-reverse p-2 border-[1px] border-black rounded-2xl bg-white text-center ">
-												{/* <input type="checkbox" name="ensuite" required value={ensuite} onChange={handleChange} /> */}
+												{console.log(ensuite, "ensuite == yes ?",ensuite === "Yes")}
 												<select
 													name="ensuite"
 													id="ensuite"
 													className="text-center h-[30px]"
 													ref={ref}
-													defaultValue={ensuite == "No" ? "false" : "true"}>
-													<option value="false" className=" text-center">
+													onChange={handleChange}
+													defaultValue={room[0].ensuite === "Yes" ? "true" : "false"}>
+													<option value="false" className="text-center">
 														False
 													</option>
-													<option value="true" className=" text-center">
+													<option value="true" className="text-center">
 														True
 													</option>
 												</select>
