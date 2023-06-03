@@ -19,7 +19,7 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 	const [location, setLocation] = useState("");
 	const [photo, setPhoto] = useState("");
 	const [pax, setPax] = useState(1);
-	const [ensuite, setEnsuite] = useState(room[0].ensuite === "Yes" ? "true" : "false");
+	const [ensuite, setEnsuite] = useState(room?.[0]?.ensuite === "Yes"?? "false");
 	const [user, loading, error] = useAuthState(auth);
 
 	const handleegetRooms = () => {
