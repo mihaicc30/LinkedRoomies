@@ -21,26 +21,39 @@ import Profile from "./components/Profile/Profile";
 import Accommodation from "./components/Accommodation/Accommodation";
 import Questionnaire from "./components/Questionnaire/Questionnaire";
 
+import { auth, db, logout } from "./config/firebase.jsx";
 import Layout from "./components/Navigation/Layout";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function App() {
+	const [user, loading, error] = useAuthState(auth);
 	return (
 		<div className="app">
-			
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route path="/" element={<LandingPage />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/login" element={<Login />} />
+
+						{user ? (
+							<>
+								<Route path="/dashboard" element={<Dashboard />} />
+								<Route path="/contact" element={<Contact />} />
+								<Route path="/accommodation" element={<Accommodation />} />
+								<Route path="/profile" element={<Profile />} />
+								<Route path="/questionnaire" element={<Questionnaire />} />
+								{user.uid === import.meta.env.VITE_ADMIN && (
+									<Route path="/admin" element={<Admin />} />
+								)}
+							</>
+						) : (
+							<>
+								<Route path="/register" element={<Register />} />
+								<Route path="/login" element={<Login />} />
+								<Route path="/reset" element={<Reset />} />
+							</>
+						)}
+
 						<Route path="/logout" element={<Logout />} />
-						<Route path="/reset" element={<Reset />} />{" "}
-						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/contact" element={<Contact />} />
-						<Route path="/accommodation" element={<Accommodation />} />
-						<Route path="/profile" element={<Profile />} />
-						<Route path="/questionnaire" element={<Questionnaire />} />
-						<Route path="/Admin" element={<Admin />} />
 						<Route path="*" element={<Dashboard />} />
 					</Route>
 				</Routes>
