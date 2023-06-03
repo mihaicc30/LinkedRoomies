@@ -65,22 +65,14 @@ The LinkedRoomies app employs an agile and design thinking methodology. This tec
 
 The LinkedRoomies app was able to produce a highly user-focused solution that was constantly refined to satisfy the needs of the target audience by combining these two techniques. The app's development process included extensive testing and iteration, with user feedback used to improve the product.
 
-  
 
-|User Story:|Iteration|
-
+| User Story:| Iteration| 
 |---------------------|-------------------------------|
-
 |As a student, I want to be able to create a profile on LinkedRoomies |Implement user authentication and registration using Firebase Authentication and profile management route. |
-
 |As a student, I want to be able to search for compatible roommates based on my preferences.| Created a filter bar where user can sort out the rooms by their preference.|
-
 |As a student, I want to be able to rate my roommates.| Created a rating system where students can rate each other. |
-
 |As a student, I want to view the compatibility of another student with myself.| Before joining a room, the student can see in the room details his compatibility with others.|
-
 |As an admin, I want to be able to view and edit/reply all registered users, messages from users and rooms.| Admin management system has been implemented to manage all these requirements.|
-
 |As an admin, I want to manage post an accommodation.| Created a button with a form on the main page for admin to be able to complete this task.|
 
   
