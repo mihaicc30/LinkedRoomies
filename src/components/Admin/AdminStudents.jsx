@@ -30,19 +30,20 @@ const AdminStudents = () => {
 	);
 	const [stds] = useCollectionData(studentsQuery);
 
-  const roomsRef = collection(db, "rooms");
-  const q = query(roomsRef);
-  const [rawRoomsData] = useCollectionData(q);
+	const roomsRef = collection(db, "rooms");
+	const q = query(roomsRef);
+	const [rawRoomsData] = useCollectionData(q);
 
-
-	console.log(stds);
-	const findStudentInWhichRoom = async(stdID) =>{
-    const q = await query(collection(db, "rooms"), where("students", "array-contains", stdID));
-    const docz = await getDocs(q);
-    if(docz.docs[0]?.data()){
-      return docz.docs[0]?.data().location
-    }
-  }
+	const findStudentInWhichRoom = async (stdID) => {
+		const q = await query(
+			collection(db, "rooms"),
+			where("students", "array-contains", stdID),
+		);
+		const docz = await getDocs(q);
+		if (docz.docs[0]?.data()) {
+			return docz.docs[0]?.data().location;
+		}
+	};
 
 	async function getStudents() {
 		if (stds) {
@@ -81,7 +82,6 @@ const AdminStudents = () => {
 	};
 
 	const handleKick = async (e) => {
-		console.log("aaaaaaa");
 		const rID = e;
 		const q = await query(
 			collection(db, "rooms"),

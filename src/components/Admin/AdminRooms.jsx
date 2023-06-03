@@ -68,7 +68,7 @@ const AdminRooms = () => {
 			const docRef = doc(db, "rooms", querySnapshot.docs[0].id);
 			const deleteQuery = await deleteDoc(docRef);
 			console.log("Document successfully deleted!");
-			getRooms();
+			setRoomz(roomz.filter((room) => room.uid!== uid));
 		} catch (error) {
 			console.error("Error deleting document: ", error);
 		}

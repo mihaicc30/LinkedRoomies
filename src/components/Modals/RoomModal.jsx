@@ -180,7 +180,7 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 								viewBox="0 0 24 24"
 								strokeWidth="1.5"
 								stroke="currentColor"
-								class="w-16 h-16 animate-spin mx-auto">
+								className="w-16 h-16 animate-spin mx-auto">
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -319,7 +319,6 @@ function RoomModal({ setOpenModal, message, type, room, handlegetRooms }) {
 											</div>
 
 											<div className="form mt-[10px] w-[45%] animate-fadeUP1 flex flex-col-reverse p-2 border-[1px] border-black rounded-2xl bg-white text-center ">
-												{console.log(ensuite, "ensuite == yes ?",ensuite === "Yes")}
 												<select
 													name="ensuite"
 													id="ensuite"
