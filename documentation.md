@@ -8,15 +8,10 @@
   
 
 |Project:|LinkedRoomies |
-
 |---------------------|-------------------------------|
-
 |Student:|10148467 |
-
 |Live:|[-Link-](https://linkroomie.web.app)| |
-
 |GitHub:|[-Link-](https://github.com/mihaicc30/LinkedRoomies)| |
-
 
 **Testing Accounts**
 
