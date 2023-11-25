@@ -8,10 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../../config/firebase.jsx";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
-import LandingPage from "./LandingPage";
 
 function Layout() {
-
+	const navigate = useNavigate()
 	const [user, loading, error] = useAuthState(auth);
 	const [userStatus, setUserStatus] = useState(false);
 	
@@ -41,7 +40,9 @@ function Layout() {
 				setUserStatus(await fetchUserStatus());
 			}
 			fetchData();
+			navigate("/dashboard")
 		}
+		if(!user) navigate("/login")
 	}, [user, loading, userStatus]);
 
 	return (

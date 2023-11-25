@@ -80,7 +80,7 @@ const AdminMessages = () => {
   }
 
   if(!messages) return
- 
+ console.log(messages);
   return (
     <>
     <div className="fixed top-[134px] bottom-0 grow ml-[6px] flex flex-col gap-[1rem]">
